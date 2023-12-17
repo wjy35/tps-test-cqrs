@@ -14,17 +14,18 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     @Transactional
-    public void join(MemberInfo memberInfo) {
-        memberInfoRepository.save(memberInfo);
+    public MemberInfo join(MemberInfo memberInfo) {
+        return memberInfoRepository.save(memberInfo);
     }
 
     @Override
     @Transactional
-    public void updateMemberInfo(MemberInfo memberInfo) {
-        memberInfo = memberInfoRepository.findById(memberInfo.getMemberId())
+    public MemberInfo updateMemberInfo(MemberInfo memberInfo) {
+        MemberInfo selectedMemberInfo = memberInfoRepository.findById(memberInfo.getMemberId())
                 .orElseThrow(()->new RuntimeException());
 
-        memberInfo.updateNickname(memberInfo.getNickname());
+        selectedMemberInfo.updateNickname(memberInfo.getNickname());
+        return memberInfo;
     }
 
     @Override
