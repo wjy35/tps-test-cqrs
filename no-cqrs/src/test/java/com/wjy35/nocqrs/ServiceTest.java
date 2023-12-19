@@ -50,4 +50,23 @@ public class ServiceTest {
         assertEquals(expected.getMemberId(),actual.getMemberId());
         verify(memberInfoRepository,times(1)).save(expected);
     }
+
+    @Test
+    @Transactional
+    void MemberService_update_return_Updated_MemberInfo(){
+        //given
+        Long memberId = 1l;
+        MemberInfo expected = MemberInfo.builder()
+                .memberId(memberId)
+                .nickname("wjy0516")
+                .name("왕준영").build();
+        when(memberInfoRepository.findById(memberId)).thenReturn(Optional.ofNullable(expected));
+
+        //when
+        MemberInfo actual = memberService.updateMemberInfo(expected);
+
+        //then
+        System.out.println("actual.getNickname() = " + actual.getNickname());
+        assertEquals(expected.getMemberId(),actual.getMemberId());
+    }
 }
