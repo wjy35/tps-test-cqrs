@@ -1,9 +1,9 @@
 package com.wjy35.nocqrs.service;
 
-import com.wjy35.nocqrs.db.entity.AccountEntity;
+import com.wjy35.nocqrs.db.entity.Account;
 
 public interface AccountService {
-    AccountEntity createAccount(AccountEntity accountEntity);
-    AccountEntity updateAccount(AccountEntity accountEntity);
-    AccountEntity detailAccount(Long accountId);
+    Account createAccount(Account account);
+    Account updateAccount(Account account);
+    Account detailAccount(Long accountId);
 }

@@ -1,6 +1,6 @@
 package com.wjy35.nocqrs.service.impl;
 
-import com.wjy35.nocqrs.db.entity.AccountEntity;
+import com.wjy35.nocqrs.db.entity.Account;
 import com.wjy35.nocqrs.db.repository.AccountRepository;
 import com.wjy35.nocqrs.service.AccountService;
 import lombok.RequiredArgsConstructor;
@@ -14,26 +14,26 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     @Transactional
-    public AccountEntity createAccount(AccountEntity accountEntity) {
-        return accountRepository.save(accountEntity);
+    public Account createAccount(Account account) {
+        return accountRepository.save(account);
     }
 
     @Override
     @Transactional
-    public AccountEntity updateAccount(AccountEntity accountEntity) {
-        AccountEntity selectedAccountEntity = accountRepository.findById(accountEntity.getAccountId())
+    public Account updateAccount(Account account) {
+        Account selectedAccount = accountRepository.findById(account.getAccountId())
                 .orElseThrow(()->new RuntimeException());
 
-        selectedAccountEntity.updateNickname(accountEntity.getNickname());
-        return accountEntity;
+        selectedAccount.updateNickname(account.getNickname());
+        return account;
     }
 
     @Override
-    public AccountEntity detailAccount(Long id) {
-        AccountEntity accountEntity;
-        accountEntity = accountRepository.findById(id)
+    public Account detailAccount(Long id) {
+        Account account;
+        account = accountRepository.findById(id)
                 .orElseThrow(()->new RuntimeException());
 
-        return accountEntity;
+        return account;
     }
 }
