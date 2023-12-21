@@ -14,13 +14,13 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     @Transactional
-    public AccountEntity join(AccountEntity accountEntity) {
+    public AccountEntity createAccount(AccountEntity accountEntity) {
         return accountRepository.save(accountEntity);
     }
 
     @Override
     @Transactional
-    public AccountEntity update(AccountEntity accountEntity) {
+    public AccountEntity updateAccount(AccountEntity accountEntity) {
         AccountEntity selectedAccountEntity = accountRepository.findById(accountEntity.getAccountId())
                 .orElseThrow(()->new RuntimeException());
 
@@ -29,7 +29,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public AccountEntity detail(Long id) {
+    public AccountEntity detailAccount(Long id) {
         AccountEntity accountEntity;
         accountEntity = accountRepository.findById(id)
                 .orElseThrow(()->new RuntimeException());

@@ -29,7 +29,7 @@ public class ServiceTest {
         when(accountRepository.findById(1l)).thenReturn(Optional.ofNullable(expected));
 
         //when
-        AccountEntity selectedAccountEntity = accountService.detail(1l);
+        AccountEntity selectedAccountEntity = accountService.detailAccount(1l);
 
         //then
         System.out.println("selectedAccountId = " + selectedAccountEntity.getAccountId());
@@ -44,7 +44,7 @@ public class ServiceTest {
         when(accountRepository.save(any(AccountEntity.class))).thenReturn(expected);
 
         //when
-        AccountEntity actual = accountService.join(expected);
+        AccountEntity actual = accountService.createAccount(expected);
 
         //then
         assertEquals(expected.getAccountId(),actual.getAccountId());
@@ -63,7 +63,7 @@ public class ServiceTest {
         when(accountRepository.findById(accountId)).thenReturn(Optional.ofNullable(expected));
 
         //when
-        AccountEntity actual = accountService.update(expected);
+        AccountEntity actual = accountService.updateAccount(expected);
 
         //then
         System.out.println("actual.getNickname() = " + actual.getNickname());
