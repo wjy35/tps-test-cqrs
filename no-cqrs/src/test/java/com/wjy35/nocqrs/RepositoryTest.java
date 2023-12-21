@@ -1,7 +1,7 @@
 package com.wjy35.nocqrs;
 
-import com.wjy35.nocqrs.db.entity.MemberEntity;
-import com.wjy35.nocqrs.db.repository.MemberRepository;
+import com.wjy35.nocqrs.db.entity.AccountEntity;
+import com.wjy35.nocqrs.db.repository.AccountRepository;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,20 +10,20 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class RepositoryTest {
     @Autowired
-    MemberRepository memberRepository;
+    AccountRepository accountRepository;
 
     @Test
     void testRepositoryLoad(){
-        assertNotNull(memberRepository);
+        assertNotNull(accountRepository);
     }
 
     @Test
-    void testSelectMemberInfo(){
-        Long memberId = 1l;
+    void select_Account_Success(){
+        Long accountId = 1l;
 
-        MemberEntity memberEntity = memberRepository.findById(memberId).get();
+        AccountEntity accountEntity = accountRepository.findById(accountId).get();
 
-        System.out.println("memberInfo.getMemberId() = " + memberEntity.getMemberId());
-        assertEquals(memberId, memberEntity.getMemberId());
+        System.out.println("accountEntity.getAccountId() = " + accountEntity.getAccountId());
+        assertEquals(accountId, accountEntity.getAccountId());
     }
 }

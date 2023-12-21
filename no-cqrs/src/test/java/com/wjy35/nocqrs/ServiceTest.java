@@ -1,8 +1,8 @@
 package com.wjy35.nocqrs;
 
-import com.wjy35.nocqrs.db.entity.MemberEntity;
-import com.wjy35.nocqrs.db.repository.MemberRepository;
-import com.wjy35.nocqrs.service.impl.MemberServiceImpl;
+import com.wjy35.nocqrs.db.entity.AccountEntity;
+import com.wjy35.nocqrs.db.repository.AccountRepository;
+import com.wjy35.nocqrs.service.impl.AccountServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -17,56 +17,56 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(MockitoExtension.class)
 public class ServiceTest {
     @Mock
-    private MemberRepository memberRepository;
+    private AccountRepository accountRepository;
 
     @InjectMocks
-    private MemberServiceImpl memberService;
+    private AccountServiceImpl accountService;
 
     @Test
-    void MemberService_view_return_Selected_MemberInfo(){
+    void detail_return_Selected_AccountEntity(){
         //given
-        MemberEntity memberEntity = MemberEntity.builder().memberId(1l).nickname("wjy35").name("왕준영").build();
-        when(memberRepository.findById(1l)).thenReturn(Optional.ofNullable(memberEntity));
+        AccountEntity expected = AccountEntity.builder().accountId(1l).nickname("wjy35").name("왕준영").build();
+        when(accountRepository.findById(1l)).thenReturn(Optional.ofNullable(expected));
 
         //when
-        MemberEntity selectedMemberEntity = memberService.viewMemberInfo(1l);
+        AccountEntity selectedAccountEntity = accountService.detail(1l);
 
         //then
-        assertEquals(memberEntity.getMemberId(), selectedMemberEntity.getMemberId());
-        System.out.println("selectedMemberInfo = " + selectedMemberEntity.getMemberId());
+        System.out.println("selectedAccountId = " + selectedAccountEntity.getAccountId());
+        assertEquals(expected.getAccountId(), selectedAccountEntity.getAccountId());
     }
 
     @Test
     @Transactional
-    void MemberService_join_return_Saved_MemberInfo(){
+    void join_return_Created_Account(){
         //given
-        MemberEntity expected = MemberEntity.builder().memberId(1l).nickname("wjy35").name("왕준영").build();
-        when(memberRepository.save(any(MemberEntity.class))).thenReturn(expected);
+        AccountEntity expected = AccountEntity.builder().accountId(1l).nickname("wjy35").name("왕준영").build();
+        when(accountRepository.save(any(AccountEntity.class))).thenReturn(expected);
 
         //when
-        MemberEntity actual = memberService.join(expected);
+        AccountEntity actual = accountService.join(expected);
 
         //then
-        assertEquals(expected.getMemberId(),actual.getMemberId());
-        verify(memberRepository,times(1)).save(expected);
+        assertEquals(expected.getAccountId(),actual.getAccountId());
+        verify(accountRepository,times(1)).save(expected);
     }
 
     @Test
     @Transactional
-    void MemberService_update_return_Updated_MemberInfo(){
+    void update_return_Updated_Account(){
         //given
-        Long memberId = 1l;
-        MemberEntity expected = MemberEntity.builder()
-                .memberId(memberId)
+        Long accountId = 1l;
+        AccountEntity expected = AccountEntity.builder()
+                .accountId(accountId)
                 .nickname("wjy0516")
                 .name("왕준영").build();
-        when(memberRepository.findById(memberId)).thenReturn(Optional.ofNullable(expected));
+        when(accountRepository.findById(accountId)).thenReturn(Optional.ofNullable(expected));
 
         //when
-        MemberEntity actual = memberService.updateMemberInfo(expected);
+        AccountEntity actual = accountService.update(expected);
 
         //then
         System.out.println("actual.getNickname() = " + actual.getNickname());
-        assertEquals(expected.getMemberId(),actual.getMemberId());
+        assertEquals(expected.getAccountId(),actual.getAccountId());
     }
 }

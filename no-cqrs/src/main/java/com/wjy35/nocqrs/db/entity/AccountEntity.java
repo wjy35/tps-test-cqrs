@@ -5,15 +5,15 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.*;
 
-@Table(name = "member_info")
+@Table(name = "account")
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
-public class MemberEntity {
+public class AccountEntity {
     @Id
-    private Long memberId;
+    private Long accountId;
 
     private String nickname;
 
