@@ -1,9 +1,9 @@
 package com.wjy35.nocqrs.service;
 
-import com.wjy35.nocqrs.db.entity.MemberInfo;
+import com.wjy35.nocqrs.db.entity.MemberEntity;
 
 public interface MemberService {
-    MemberInfo join(MemberInfo memberInfo);
-    MemberInfo updateMemberInfo(MemberInfo memberInfo);
-    MemberInfo viewMemberInfo(Long id);
+    MemberEntity join(MemberEntity memberEntity);
+    MemberEntity updateMemberInfo(MemberEntity memberEntity);
+    MemberEntity viewMemberInfo(Long id);
 }

@@ -1,30 +1,29 @@
 package com.wjy35.nocqrs;
 
-import com.wjy35.nocqrs.db.entity.MemberInfo;
-import com.wjy35.nocqrs.db.repository.MemberInfoRepository;
+import com.wjy35.nocqrs.db.entity.MemberEntity;
+import com.wjy35.nocqrs.db.repository.MemberRepository;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
 public class RepositoryTest {
     @Autowired
-    MemberInfoRepository memberInfoRepository;
+    MemberRepository memberRepository;
 
     @Test
     void testRepositoryLoad(){
-        assertNotNull(memberInfoRepository);
+        assertNotNull(memberRepository);
     }
 
     @Test
     void testSelectMemberInfo(){
         Long memberId = 1l;
 
-        MemberInfo memberInfo = memberInfoRepository.findById(memberId).get();
+        MemberEntity memberEntity = memberRepository.findById(memberId).get();
 
-        System.out.println("memberInfo.getMemberId() = " + memberInfo.getMemberId());
-        assertEquals(memberId,memberInfo.getMemberId());
+        System.out.println("memberInfo.getMemberId() = " + memberEntity.getMemberId());
+        assertEquals(memberId, memberEntity.getMemberId());
     }
 }
